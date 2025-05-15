@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Plus, Minus, X, Divide, Equal } from "lucide-react";
+import { Plus, Minus, Asterisk, Divide, Equal } from "lucide-react";
 
 const Index = () => {
   const [display, setDisplay] = useState<string>('0');
@@ -51,10 +51,10 @@ const Index = () => {
         case '-':
           newValue = currentValue - inputValue;
           break;
-        case 'x':
+        case '*':
           newValue = currentValue * inputValue;
           break;
-        case '÷':
+        case '/':
           if (inputValue === 0) {
             clearDisplay();
             return;
@@ -85,10 +85,10 @@ const Index = () => {
       case '-':
         newValue = currentValue - inputValue;
         break;
-      case 'x':
+      case '*':
         newValue = currentValue * inputValue;
         break;
-      case '÷':
+      case '/':
         if (inputValue === 0) {
           clearDisplay();
           return;
@@ -120,48 +120,29 @@ const Index = () => {
             </div>
           </div>
 
+          {/* Reorganized grid layout based on the reference image */}
           <div className="grid grid-cols-4 gap-2">
-            {/* Clear and backspace */}
-            <Button
-              variant="destructive"
-              className="col-span-2 h-14 text-lg font-semibold bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 shadow-[0_0_10px_rgba(239,68,68,0.5)]"
-              onClick={clearDisplay}
-            >
-              AC
-            </Button>
+            {/* First row: C, /, *, - */}
             <Button
               variant="outline"
               className="h-14 text-lg font-semibold border-[#8B5CF6]/50 text-[#8B5CF6] bg-[#221F26]/70 hover:bg-[#8B5CF6]/20"
-              onClick={() => setDisplay(display.length > 1 ? display.slice(0, -1) : '0')}
+              onClick={clearDisplay}
             >
-              DEL
+              C
             </Button>
             <Button
               variant="outline"
               className="h-14 flex items-center justify-center border-[#8B5CF6]/50 text-[#8B5CF6] bg-[#221F26]/70 hover:bg-[#8B5CF6]/20"
-              onClick={() => handleOperator('÷')}
+              onClick={() => handleOperator('/')}
             >
               <Divide className="h-5 w-5" />
             </Button>
-
-            {/* Numbers */}
-            {[7, 8, 9, 4, 5, 6, 1, 2, 3].map(number => (
-              <Button
-                key={number}
-                className="h-14 text-xl font-semibold bg-[#2D2A3B] hover:bg-[#3D3A4B] text-white/90 shadow-[0_0_5px_rgba(139,92,246,0.3)] transition-all duration-150 hover:translate-y-[-2px]"
-                onClick={() => inputDigit(String(number))}
-              >
-                {number}
-              </Button>
-            ))}
-
-            {/* Operators */}
             <Button
               variant="outline"
               className="h-14 flex items-center justify-center border-[#8B5CF6]/50 text-[#8B5CF6] bg-[#221F26]/70 hover:bg-[#8B5CF6]/20"
-              onClick={() => handleOperator('x')}
+              onClick={() => handleOperator('*')}
             >
-              <X className="h-5 w-5" />
+              <Asterisk className="h-5 w-5" />
             </Button>
             <Button
               variant="outline"
@@ -169,6 +150,26 @@ const Index = () => {
               onClick={() => handleOperator('-')}
             >
               <Minus className="h-5 w-5" />
+            </Button>
+
+            {/* Second row: 7, 8, 9, + */}
+            <Button
+              className="h-14 text-xl font-semibold bg-[#2D2A3B] hover:bg-[#3D3A4B] text-white/90 shadow-[0_0_5px_rgba(139,92,246,0.3)] transition-all duration-150 hover:translate-y-[-2px]"
+              onClick={() => inputDigit('7')}
+            >
+              7
+            </Button>
+            <Button
+              className="h-14 text-xl font-semibold bg-[#2D2A3B] hover:bg-[#3D3A4B] text-white/90 shadow-[0_0_5px_rgba(139,92,246,0.3)] transition-all duration-150 hover:translate-y-[-2px]"
+              onClick={() => inputDigit('8')}
+            >
+              8
+            </Button>
+            <Button
+              className="h-14 text-xl font-semibold bg-[#2D2A3B] hover:bg-[#3D3A4B] text-white/90 shadow-[0_0_5px_rgba(139,92,246,0.3)] transition-all duration-150 hover:translate-y-[-2px]"
+              onClick={() => inputDigit('9')}
+            >
+              9
             </Button>
             <Button
               variant="outline"
@@ -178,13 +179,53 @@ const Index = () => {
               <Plus className="h-5 w-5" />
             </Button>
 
-            {/* Zero, decimal, equals */}
+            {/* Third row: 4, 5, 6, = */}
             <Button
-              className="h-14 text-xl font-semibold bg-[#2D2A3B] hover:bg-[#3D3A4B] text-white/90 col-span-2 shadow-[0_0_5px_rgba(139,92,246,0.3)] transition-all duration-150 hover:translate-y-[-2px]"
-              onClick={() => inputDigit('0')}
+              className="h-14 text-xl font-semibold bg-[#2D2A3B] hover:bg-[#3D3A4B] text-white/90 shadow-[0_0_5px_rgba(139,92,246,0.3)] transition-all duration-150 hover:translate-y-[-2px]"
+              onClick={() => inputDigit('4')}
             >
-              0
+              4
             </Button>
+            <Button
+              className="h-14 text-xl font-semibold bg-[#2D2A3B] hover:bg-[#3D3A4B] text-white/90 shadow-[0_0_5px_rgba(139,92,246,0.3)] transition-all duration-150 hover:translate-y-[-2px]"
+              onClick={() => inputDigit('5')}
+            >
+              5
+            </Button>
+            <Button
+              className="h-14 text-xl font-semibold bg-[#2D2A3B] hover:bg-[#3D3A4B] text-white/90 shadow-[0_0_5px_rgba(139,92,246,0.3)] transition-all duration-150 hover:translate-y-[-2px]"
+              onClick={() => inputDigit('6')}
+            >
+              6
+            </Button>
+            <Button
+              className="h-14 flex items-center justify-center bg-gradient-to-r from-[#8B5CF6] to-[#6D28D9] hover:from-[#7C3AED] hover:to-[#6D28D9] text-white shadow-[0_0_10px_rgba(139,92,246,0.5)] transition-all duration-150 hover:translate-y-[-2px] row-span-2"
+              onClick={performCalculation}
+            >
+              <Equal className="h-5 w-5" />
+            </Button>
+
+            {/* Fourth row: 1, 2, 3, (= continued from above) */}
+            <Button
+              className="h-14 text-xl font-semibold bg-[#2D2A3B] hover:bg-[#3D3A4B] text-white/90 shadow-[0_0_5px_rgba(139,92,246,0.3)] transition-all duration-150 hover:translate-y-[-2px]"
+              onClick={() => inputDigit('1')}
+            >
+              1
+            </Button>
+            <Button
+              className="h-14 text-xl font-semibold bg-[#2D2A3B] hover:bg-[#3D3A4B] text-white/90 shadow-[0_0_5px_rgba(139,92,246,0.3)] transition-all duration-150 hover:translate-y-[-2px]"
+              onClick={() => inputDigit('2')}
+            >
+              2
+            </Button>
+            <Button
+              className="h-14 text-xl font-semibold bg-[#2D2A3B] hover:bg-[#3D3A4B] text-white/90 shadow-[0_0_5px_rgba(139,92,246,0.3)] transition-all duration-150 hover:translate-y-[-2px]"
+              onClick={() => inputDigit('3')}
+            >
+              3
+            </Button>
+
+            {/* Fifth row: ., 0 */}
             <Button
               className="h-14 text-xl font-semibold bg-[#2D2A3B] hover:bg-[#3D3A4B] text-white/90 shadow-[0_0_5px_rgba(139,92,246,0.3)] transition-all duration-150 hover:translate-y-[-2px]"
               onClick={inputDecimal}
@@ -192,10 +233,10 @@ const Index = () => {
               .
             </Button>
             <Button
-              className="h-14 flex items-center justify-center bg-gradient-to-r from-[#8B5CF6] to-[#6D28D9] hover:from-[#7C3AED] hover:to-[#6D28D9] text-white shadow-[0_0_10px_rgba(139,92,246,0.5)] transition-all duration-150 hover:translate-y-[-2px]"
-              onClick={performCalculation}
+              className="h-14 text-xl font-semibold bg-[#2D2A3B] hover:bg-[#3D3A4B] text-white/90 shadow-[0_0_5px_rgba(139,92,246,0.3)] transition-all duration-150 hover:translate-y-[-2px] col-span-2"
+              onClick={() => inputDigit('0')}
             >
-              <Equal className="h-5 w-5" />
+              0
             </Button>
           </div>
         </div>
