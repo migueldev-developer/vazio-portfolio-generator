@@ -1,2 +1,25 @@
 
-/* Arquivo CSS em branco */
+/* Estilos gamers para a calculadora */
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+:root {
+  --glow-color: #8B5CF6;
+}
+
+body {
+  margin: 0;
+  font-family: 'Share Tech Mono', monospace;
+  background: linear-gradient(135deg, #1A1F2C 0%, #121212 100%);
+  color: #fff;
+  overflow-x: hidden;
+}
+
+/* Adiciona efeito de brilho nos botões */
+button:hover {
+  box-shadow: 0 0 15px var(--glow-color);
+}
+
+/* Efeito de pressionamento nos botões */
+button:active {
+  transform: scale(0.95);
+}

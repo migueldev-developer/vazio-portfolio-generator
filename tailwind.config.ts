@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -18,6 +19,9 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				mono: ['Share Tech Mono', 'monospace'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -61,6 +65,13 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				gamer: {
+					purple: '#8B5CF6',
+					dark: '#1A1F2C',
+					darker: '#121212',
+					button: '#2D2A3B',
+					buttonHover: '#3D3A4B',
 				}
 			},
 			borderRadius: {
@@ -69,26 +80,38 @@ export default {
 				sm: 'calc(var(--radius) - 4px)'
 			},
 			keyframes: {
-				'accordion-down': {
+				"accordion-down": {
 					from: {
-						height: '0'
+						height: "0"
 					},
 					to: {
-						height: 'var(--radix-accordion-content-height)'
+						height: "var(--radix-accordion-content-height)"
 					}
 				},
-				'accordion-up': {
+				"accordion-up": {
 					from: {
-						height: 'var(--radix-accordion-content-height)'
+						height: "var(--radix-accordion-content-height)"
 					},
 					to: {
-						height: '0'
+						height: "0"
 					}
+				},
+				"glow": {
+					"0%": { boxShadow: "0 0 5px #8B5CF6" },
+					"50%": { boxShadow: "0 0 20px #8B5CF6" },
+					"100%": { boxShadow: "0 0 5px #8B5CF6" }
+				},
+				"float": {
+					"0%": { transform: "translateY(0px)" },
+					"50%": { transform: "translateY(-10px)" },
+					"100%": { transform: "translateY(0px)" }
 				}
 			},
 			animation: {
-				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				"accordion-down": "accordion-down 0.2s ease-out",
+				"accordion-up": "accordion-up 0.2s ease-out",
+				"glow": "glow 1.5s infinite",
+				"float": "float 3s ease-in-out infinite"
 			}
 		}
 	},
